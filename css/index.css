@@ -1,4 +1,19 @@
-circle{
+@keyframes example {
+    from {background-color: black;}
+    to {background-color: yellow;}
+}
+
+svg {
+	background-color: black;
+	height: 700px; 
+	width: 1327px;
+	animation-name: example;
+    animation-duration: 4s;
+}
+
+.dot{
 	stroke: grey;
 	stroke-width: 1;
+	animation-name: example;
+    animation-duration: 4s;
 }
