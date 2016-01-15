@@ -15,12 +15,12 @@ function loadEnvironment(){
 	background = document.getElementById("bgenvironment");
 	console.log(background);
 	for(var i=0; i<500; i++){
-		var cx = (Math.random()*width);
-		var cy = (Math.random()*height);
+		var cx = "" + (Math.random()*100)+"%";
+		var cy = "" + (Math.random()*100)+"%";
 		if(i<200){
 			while(!initials(cx, cy)){
-				cx = (Math.random()*width);
-				cy = (Math.random()*height);
+				cx = "" + (Math.random()*100)+"%";
+				cy = "" + (Math.random()*100)+"%";
 			}
 		}
 		var r = (Math.random()*7) + 7;
@@ -39,24 +39,27 @@ function showCoords(event) {
     //console.log(coor);	
 }
 
-function initials(x, y){
+function initials(a, b){
+	var x = parseInt(a.substring(0, a.length-1));
+	var y = parseInt(b.substring(0, b.length-1));
 	var ret = false;
-	if(x>100 && x<350 && y>400 && y<600){
+	if(x>7.53 && x<26.37 && y>57.14 && y<85.71){
 		ret = true;
 	}
-	if(x>350 && x<500 && y>200 && y<600){
+	if(x>26.37 && x<37.67 && y>28.57 && y<85.71){
 		ret = true;
 	}
-	if(x>100 && x<700 && y>0 && y<200){
+	if(x>7.53 && x<52.75 && y>0 && y<28.57){
 		ret = true;
 	}
-	if(x>775 && x<1000 && y>0 && y<600){
+
+	if(x>58.40 && x<66.35 && y>0 && y<85.71){
 		ret = true;
 	}
-	if(x>800 && x<1400 && y>0 && y<600 && y>(-.9)*(x-1300) && y<(-.9)*(x-1500)){
+	if(x>60.28 && x<100 && y>0 && y<85.71 && y>(-.9)*(x-117.96) && y<(-.9)*(x-133.03)){
 		ret = true;
 	}
-	if(x>800 && x<1400 && y>0 && y<600 && y>(.9)*(x-700) && y<(.9)*(x-500)){
+	if(x>60.28 && x<100 && y>0 && y<85.71 && y>(.9)*(x-12.75) && y<(.9)*(x+2.33)){
 		ret = true;
 	}
 	return ret;
@@ -82,7 +85,10 @@ function dotsAnimate(){
 	    },
 	    click: function(){
 	    	for(var i=0; i<500; i++){
-	    		if(initials(parseInt($("#circle"+i).attr("cx")) + parseInt($("#circle"+i).attr("r")),parseInt($("#circle"+i).attr("cy"))+parseInt($("#circle"+i).attr("r")) )) { 
+	    		var x = parseInt($("#circle"+i).attr("cx").substring(0,$("#circle"+i).attr("cx").length-1));
+	    		var y = parseInt($("#circle"+i).attr("cy").substring(0,$("#circle"+i).attr("cy").length-1));
+	    		var r = parseInt($("#circle"+i).attr("r"));
+	    		if(initials(x+r/width*100 + "%", y+r/height*100 + "%")) { 
 	    			$("#circle"+i).attr("r", parseInt(($("#circle"+i).attr("r"))) + 3);
 	    			$("#circle"+i).css("fill","lime");
 	    		}
@@ -106,7 +112,7 @@ function dotsAnimate(){
 	        }
 	    }, 
 	    mouseleave: function(){
-	    	console.log("==" + $(this).attr("cx") + ", " + $(this).attr("cy"));
+	    	//console.log("==" + $(this).attr("cx") + ", " + $(this).attr("cy"));
 	        $(this).css("fill", "darkgreen");
 	        $(this).attr("r", parseInt(($(this).attr("r"))) - 3);
 	    }
